@@ -5,6 +5,7 @@ class Main {
     static public void main (String []args) throws Exception{
         //Scanner sc = new Scanner (System.in);
         FileReader fr = new FileReader("/Users/aleksey/IdeaProjects/Hello world/out/production/Hello world/input.txt");
+        FileWriter fw = new FileWriter("output.txt");
         Scanner sc = new Scanner(fr);
         String str = sc.nextLine();
         sc.close();
@@ -20,7 +21,8 @@ class Main {
                 try {
                     a = Double.valueOf(num);
                 }catch(NumberFormatException e) {
-                    System.out.print("Error! Not number\n");
+                    fw.write("Error! Not number\n");
+                    fw.close();
                     is = false;
                     break;
                 }
@@ -29,7 +31,8 @@ class Main {
                 try {
                     b = Double.valueOf(num);
                 }catch(NumberFormatException e) {
-                    System.out.print("Error! Not number\n");
+                    fw.write("Error! Not number\n");
+                    fw.close();
                     is = false;
                     break;
                 }
@@ -43,7 +46,8 @@ class Main {
                     try {
                         znak = result(num,znak);
                     }catch(Exception s){
-                        System.out.print("Operation Error!");
+                        fw.write("Operation Error!");
+                        fw.close();
                         is=false;
                         break;
                     }
@@ -52,17 +56,18 @@ class Main {
         }
         if(is) {
             switch(znak){
-                case('+'): System.out.print(a + b);
+                case('+'): fw.write(Double.toString(a + b));
                     break;
-                case('-'): System.out.print(a - b);
+                case('-'): fw.write(Double.toString(a - b));
                     break;
                 case('/'):
-                    if(b==0.0) System.out.print("Error! Division by zero");
-                    else	 System.out.print(a / b);
+                    if(b==0.0) fw.write("Error! Division by zero");
+                    else	 fw.write(Double.toString(a / b));
                     break;
-                case('*'): System.out.print(a * b);
+                case('*'): fw.write(Double.toString(a * b));
                     break;
             }
+            fw.close();
         }
 
     }
